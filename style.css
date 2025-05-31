@@ -1,0 +1,154 @@
+/* Genel Sayfa Stilleri */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px; /* Sayfaya biraz boşluk */
+    background-color: #f0f0f0;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Simülasyonu yukarı yasla */
+    min-height: 100vh;
+}
+
+.simulation-container {
+    width: 95%;
+    max-width: 1000px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.simulation-header {
+    background-color: #f8f9fa;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
+.simulation-header h1 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.simulation-main {
+    display: flex;
+    flex-wrap: wrap; /* Küçük ekranlarda alt alta geçsin */
+    padding: 20px;
+}
+
+.circuit-area {
+    flex: 3; /* Devre alanına daha fazla yer */
+    background-color: #e9ecef;
+    padding: 15px;
+    border: 1px dashed #bbb;
+    margin-right: 20px;
+    min-height: 350px; /* Yükseklik */
+    margin-bottom: 20px; /* Küçük ekranlarda boşluk */
+}
+
+.circuit-area h2, .controls-area h2 {
+    margin-top: 0;
+    font-size: 1.2em;
+    color: #555;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+.battery-rack {
+    display: flex; /* Pilleri yan yana sırala */
+    align-items: center; /* Dikeyde ortala */
+    margin-bottom: 20px;
+    min-height: 60px; /* Pil SVG'leri için yer */
+}
+
+.battery-cell {
+    width: 50px; /* Pil SVG'nizin boyutuna göre ayarlayın */
+    height: auto;
+    margin-right: 2px; /* Piller arası boşluk */
+}
+
+/* Örnek direnç için (eğer eklenirse) */
+#resistor {
+    display: block;
+    margin: 20px auto;
+    width: 150px;
+}
+
+.controls-area {
+    flex: 1; /* Kontrol paneline daha az yer */
+    background-color: #f8f9fa;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    min-width: 250px; /* Minimum genişlik */
+    margin-bottom: 20px; /* Küçük ekranlarda boşluk */
+}
+
+.control-group {
+    margin-bottom: 20px;
+}
+
+.control-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.control-group input[type="range"] {
+    width: 100%;
+    cursor: pointer;
+}
+
+.control-group span, .info-group span {
+    display: inline-block;
+    margin-top: 5px;
+    font-weight: bold;
+    color: #007bff;
+    min-width: 50px; /* Değerlerin kaymasını engellemek için */
+    text-align: right;
+}
+
+.info-group {
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px dashed #ccc;
+}
+
+#reset-button {
+    background-color: #ffc107;
+    color: #333;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+}
+
+#reset-button:hover {
+    background-color: #e0a800;
+}
+
+.simulation-footer {
+    background-color: #f8f9fa;
+    padding: 10px 20px;
+    border-top: 1px solid #ddd;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+/* Küçük ekranlar için düzenleme */
+@media (max-width: 768px) {
+    .simulation-main {
+        flex-direction: column;
+    }
+    .circuit-area {
+        margin-right: 0; /* Yan yana olmadığında sağ boşluğu kaldır */
+    }
+}

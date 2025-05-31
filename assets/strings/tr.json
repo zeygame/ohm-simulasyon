@@ -1,0 +1,10 @@
+{
+    "simulationTitle": "Ohm Simülasyonu",
+    "voltageLabel": "Gerilim (V):",
+    "resistanceLabel": "Direnç (R):",
+    "currentLabel": "Akım (I):",
+    "voltageUnit": "V",
+    "resistanceUnit": "Ω",
+    "currentUnit": "mA",
+    "batteryVoltageLabel": "1.5V"
+}

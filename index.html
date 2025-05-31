@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ohm Yasası Simülasyonu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="simulation-container">
+        <header class="simulation-header">
+            <h1>Ohm Yasası</h1>
+        </header>
+
+        <main class="simulation-main">
+            <section class="circuit-area">
+                <h2>Devre Alanı</h2>
+                <div class="battery-rack">
+                    <img alt="Pil Hücresi" class="battery-cell" id="batt-cell-1" style="display:none;">
+                    <img alt="Pil Hücresi" class="battery-cell" id="batt-cell-2" style="display:none;">
+                    <img alt="Pil Hücresi" class="battery-cell" id="batt-cell-3" style="display:none;">
+                    <img alt="Pil Hücresi" class="battery-cell" id="batt-cell-4" style="display:none;">
+                    <img alt="Pil Hücresi" class="battery-cell" id="batt-cell-5" style="display:none;">
+                    <img alt="Pil Hücresi" class="battery-cell" id="batt-cell-6" style="display:none;">
+                </div>
+                </section>
+
+            <aside class="controls-area">
+                <h2>Kontrol Paneli</h2>
+                <div class="control-group">
+                    <label for="voltage-slider">Voltaj (V)</label>
+                    <input type="range" id="voltage-slider" name="voltage" min="0" max="9" step="0.1" value="4.5">
+                    <span id="voltage-value">4.5 V</span>
+                </div>
+                <div class="control-group">
+                    <label for="resistance-slider">Direnç (R)</label>
+                    <input type="range" id="resistance-slider" name="resistance" min="10" max="1000" step="10" value="500">
+                    <span id="resistance-value">500 Ω</span>
+                </div>
+                <div class="info-group">
+                    <p>Akım (I): <span id="current-display">0.0 mA</span></p>
+                </div>
+                <button id="reset-button">Sıfırla</button>
+            </aside>
+        </main>
+
+        <footer class="simulation-footer">
+            </footer>
+    </div>
+
+    <script src="js/Model.js"></script>
+    <script src="js/View.js"></script>
+    <script src="js/Controller.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
