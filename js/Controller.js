@@ -1,62 +1,56 @@
-class Controller {
-    constructor(model, view) {
-        this.model = model;
-        this.view = view;
+// js/Controller.js
+import { Model } from './Model.js';
+import { View } from './View.js';
+import { SoundManager } from './SoundManager.js';
+import { DEFAULT_VOLTAGE, DEFAULT_RESISTANCE } from './Constants.js';
 
-        this.initializeView(); // Başlangıç görünümünü ayarla
+export class Controller {
+    constructor() {
+        this.model = new Model();
+        this.view = new View();
+        this.soundManager = new SoundManager();
 
-        this.view.bindVoltageChange(this.handleVoltageChange.bind(this));
-        this.view.bindResistanceChange(this.handleResistanceChange.bind(this));
-        this.view.bindReset(this.handleReset.bind(this));
+        // DOM Elementleri (Sliderlar ve Reset Butonu)
+        this.voltageSlider = document.getElementById('voltageSlider');
+        this.resistanceSlider = document.getElementById('resistanceSlider');
+        this.resetButton = document.getElementById('resetButton');
+
+        // Başlangıç değerlerini ayarla
+        this.voltageSlider.value = DEFAULT_VOLTAGE;
+        this.resistanceSlider.value = DEFAULT_RESISTANCE;
     }
 
-    initializeView() {
-        const voltage = this.model.getVoltage();
-        const resistance = this.model.getResistance();
-        const current = this.model.getCurrent();
-        const activeCells = this.calculateActiveCells(voltage);
+    async init() {
+        await this.view.loadAssets(); // SVG'leri yükle
 
-        this.view.resetView(voltage, resistance, current, activeCells);
+        this.voltageSlider.addEventListener('input', (event) => {
+            this.model.setVoltage(event.target.value);
+            this.updateSimulation();
+            this.soundManager.enableSound(); // İlk kullanıcı etkileşiminde sesi etkinleştir
+        });
+
+        this.resistanceSlider.addEventListener('input', (event) => {
+            this.model.setResistance(event.target.value);
+            this.updateSimulation();
+            this.soundManager.enableSound(); // İlk kullanıcı etkileşiminde sesi etkinleştir
+        });
+
+        this.resetButton.addEventListener('click', () => {
+            this.model.reset();
+            // Slider'ları da resetle
+            this.voltageSlider.value = this.model.getState().voltage;
+            this.resistanceSlider.value = this.model.getState().resistance;
+            this.updateSimulation();
+            // Ses resetlenirken özel bir durum gerekirse burada eklenebilir.
+        });
+
+        // İlk yüklemede simülasyonu güncelle
+        this.updateSimulation();
     }
 
-    calculateActiveCells(voltage) {
-        let cells = 0;
-        if (voltage > 0) {
-            // Voltaj 0.75V'tan küçükse 0 pil, büyükse en az 1 pil (yuvarlama ile)
-            // Bu, 0.1V gibi çok küçük değerlerde bile pil göstermesini engeller,
-            // veya en az 0.75V'a ulaşıldığında ilk pili gösterir.
-            // PhET'teki gibi hassas kısmi pil olmadığı için bu bir yaklaşımdır.
-             if (voltage < 0.75 && voltage > 0) { // Çok küçük voltajlar için 0 pil
-                cells = 0;
-             } else {
-                cells = Math.round(voltage / 1.5);
-             }
-        }
-        return Math.min(6, Math.max(0, cells)); // 0-6 arasında sınırla
-    }
-
-    handleVoltageChange(newVoltage) {
-        this.model.setVoltage(newVoltage);
-        
-        const currentVoltage = this.model.getVoltage(); // Modelden teyit et
-        const activeCells = this.calculateActiveCells(currentVoltage);
-        
-        this.view.displayVoltage(currentVoltage);
-        this.view.displayCurrent(this.model.getCurrent());
-        this.view.displayBatteries(activeCells);
-        // console.log(`Controller: Voltaj -> ${currentVoltage}V, Hücreler -> ${activeCells}`);
-    }
-
-    handleResistanceChange(newResistance) {
-        this.model.setResistance(newResistance);
-        this.view.displayResistance(this.model.getResistance());
-        this.view.displayCurrent(this.model.getCurrent());
-        // console.log(`Controller: Direnç -> ${this.model.getResistance()}Ω`);
-    }
-
-    handleReset() {
-        this.model.reset();
-        this.initializeView(); // Sıfırlama sonrası görünümü yeniden başlat
-        // console.log("Controller: Simülasyon sıfırlandı.");
+    updateSimulation() {
+        const state = this.model.getState();
+        this.view.update(state);
+        this.soundManager.updateSound(state.resistance, state.voltage);
     }
 }
