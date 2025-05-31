@@ -3,54 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ohm Yasası Simülasyonu</title>
+    <title>Ohm Kanunu Simülasyonu</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
 </head>
 <body>
     <div class="simulation-container">
-        <header class="simulation-header">
-            <h1>Ohm Yasası</h1>
-        </header>
+        <div id="equation-display">
+            <span class="v-letter">V</span> = <span class="i-letter">I</span> × <span class="r-letter">R</span>
+        </div>
 
-        <main class="simulation-main">
-            <section class="circuit-area">
-                <h2>Devre Alanı</h2>
-                <div class="battery-rack">
-                    <img alt="Pil Hücresi" class="battery-cell" id="batt-cell-1" style="display:none;">
-                    <img alt="Pil Hücresi" class="battery-cell" id="batt-cell-2" style="display:none;">
-                    <img alt="Pil Hücresi" class="battery-cell" id="batt-cell-3" style="display:none;">
-                    <img alt="Pil Hücresi" class="battery-cell" id="batt-cell-4" style="display:none;">
-                    <img alt="Pil Hücresi" class="battery-cell" id="batt-cell-5" style="display:none;">
-                    <img alt="Pil Hücresi" class="battery-cell" id="batt-cell-6" style="display:none;">
-                </div>
-                </section>
+        <div class="main-interactive-area"> <div id="ohmCanvasContainer"> <canvas id="ohmCanvas" width="600" height="350"></canvas>
+            </div>
 
-            <aside class="controls-area">
-                <h2>Kontrol Paneli</h2>
-                <div class="control-group">
-                    <label for="voltage-slider">Voltaj (V)</label>
-                    <input type="range" id="voltage-slider" name="voltage" min="0" max="9" step="0.1" value="4.5">
-                    <span id="voltage-value">4.5 V</span>
+            <div class="controls-panel">
+                <div id="current-display-container">
+                    Akım (I): <span id="currentValue">0.00</span> mA
                 </div>
-                <div class="control-group">
-                    <label for="resistance-slider">Direnç (R)</label>
-                    <input type="range" id="resistance-slider" name="resistance" min="10" max="1000" step="10" value="500">
-                    <span id="resistance-value">500 Ω</span>
+                <div class="controls-container">
+                    <div class="slider-group">
+                        <label for="voltageSlider">Gerilim (V)</label>
+                        <input type="range" id="voltageSlider" min="0.1" max="9" value="4.5" step="0.1">
+                        <div class="value-display"><span id="voltageValue">4.5</span> V</div>
+                    </div>
+                    <div class="slider-group">
+                        <label for="resistanceSlider">Direnç (R)</label>
+                        <input type="range" id="resistanceSlider" min="10" max="1000" value="500" step="10">
+                        <div class="value-display"><span id="resistanceValue">500</span> Ω</div>
+                    </div>
                 </div>
-                <div class="info-group">
-                    <p>Akım (I): <span id="current-display">0.0 mA</span></p>
-                </div>
-                <button id="reset-button">Sıfırla</button>
-            </aside>
-        </main>
+            </div>
+        </div>
 
-        <footer class="simulation-footer">
-            </footer>
+        <button id="resetButton">Sıfırla</button>
     </div>
 
-    <script src="js/Model.js"></script>
-    <script src="js/View.js"></script>
-    <script src="js/Controller.js"></script>
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>
