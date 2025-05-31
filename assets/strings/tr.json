@@ -1,10 +1,38 @@
 {
-    "simulationTitle": "Ohm Simülasyonu",
-    "voltageLabel": "Gerilim (V):",
-    "resistanceLabel": "Direnç (R):",
-    "currentLabel": "Akım (I):",
-    "voltageUnit": "V",
-    "resistanceUnit": "Ω",
-    "currentUnit": "mA",
-    "batteryVoltageLabel": "1.5V"
+  "app": {
+    "title": "Ohm Kanunu Simülasyonu"
+  },
+  "equation": {
+    "vSymbol": "V",
+    "iSymbol": "I",
+    "rSymbol": "R",
+    "equals": "=",
+    "times": "×"
+  },
+  "labels": {
+    "current": "Akım (I):",
+    "voltage": "Gerilim (V)",
+    "resistance": "Direnç (R)"
+  },
+  "units": {
+    "milliampere": "mA",
+    "volt": "V",
+    "ohm": "Ω"
+  },
+  "buttons": {
+    "reset": "Sıfırla"
+  },
+  "canvasText": {
+    "batteryVoltageUnit": "V"
+  },
+  "messages": {
+    "error": {
+      "simulationLoadFailed": "Simülasyon Yüklenemedi",
+      "checkConsoleOrRefresh": "Lütfen konsolu kontrol edin veya sayfayı yenileyin.",
+      "assetsLoadFailed": "Gerekli varlıklar yüklenemedi."
+    },
+    "sound": {
+        "enablePrompt": "Sesi etkinleştirmek için tıklayın"
+    }
+  }
 }
